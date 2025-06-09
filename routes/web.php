@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MailController;
 
 use App\Livewire\Users\UserIndex;
 use App\Livewire\Users\UserCreate;
@@ -24,6 +25,10 @@ use App\Livewire\Permissions\PermissionDelete;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('/mail-preview', function () {
+    return view('mails.basic');
+})->name('mail-preview');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -55,6 +60,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create', PermissionCreate::class)->name('create');
         Route::get('/edit/{permission}', PermissionEdit::class)->name('edit');
         Route::get('/delete/{permission}', PermissionDelete::class)->name('delete');
+    });
+
+    Route::group(['prefix' => 'mails', 'as' => 'mails.'], function() {
+       Route::get('/template', [MailController::class, 'viewTemplate'])->name('view.template');
     });
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');

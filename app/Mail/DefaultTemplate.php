@@ -2,10 +2,12 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -17,14 +19,16 @@ class DefaultTemplate extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+
+    public $user;
+    public $link;
+    public function __construct($user, $link)
     {
+        $this->user = $user;
+        $this->link = $link;
+
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'Admin'),
-//            replyTo: [
-//                new Address('taylor@example.com', 'Taylor Otwell'),
-//            ],
-            subject: 'Default template',
+            subject: 'View template',
         );
     }
 
@@ -44,7 +48,11 @@ class DefaultTemplate extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.template',
+            with: [
+                'user' => $this->user,
+                'link' => $this->link,
+            ]
         );
     }
 
@@ -55,6 +63,9 @@ class DefaultTemplate extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromPath(storage_path('app/public/awareness_v1.png'))
+            ->as('pj')
+        ];
     }
 }
