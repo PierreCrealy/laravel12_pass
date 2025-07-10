@@ -4,8 +4,14 @@
     "src": "resources/css/app.css",
     "isEntry": true
   },
+  "resources/js/app.common.js": {
+    "file": "assets/app.common-BhdBIWz4.js",
+    "name": "app.common",
+    "src": "resources/js/app.common.js",
+    "isEntry": true
+  },
   "resources/js/app.js": {
-    "file": "assets/app-DmyahxZu.js",
+    "file": "assets/app-O4qkJCod.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

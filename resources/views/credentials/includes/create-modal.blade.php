@@ -12,6 +12,12 @@
             <flux:input type="text" name="name" label="Name" placeholder="Your name" class="mb-5"/>
             <flux:input type="text" name="value" label="Value" placeholder="Your credential" class="mb-5"/>
 
+            <flux:select name="repertory_id" label="Repertory" placeholder="Choose repertory..." class="mb-5">
+                @foreach(\App\Models\Repertory::all() as $repo)
+                    <flux:select.option>{{ $repo->name }}</flux:select.option>
+                @endforeach
+            </flux:select>
+
 
             <flux:separator class="mt-10 mb-5" />
 

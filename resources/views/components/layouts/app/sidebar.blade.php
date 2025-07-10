@@ -11,6 +11,15 @@
                 <x-app-logo />
             </a>
 
+            <flux:modal.trigger name="password-generator">
+                <flux:button class="mt-10 mb-5" icon="cube" >Password Generator</flux:button>
+            </flux:modal.trigger>
+
+            @include('includes.password-generator')
+
+
+
+
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
@@ -22,7 +31,7 @@
                                 icon="document"
                                 badge="{{ $repertory->credentials()->count() }}" badge-color="lime"
                                 :href="route('credentials.index', ['repertory' => $repertory])"
-                                :current="request()->routeIs('credentials.index')"
+                                {{-- :current="request()->routeIs('credentials.index')" --}}
                                 wire:navigate
                             >
                                 {{ \Illuminate\Support\Str::limit($repertory->name, 15) }}
@@ -35,19 +44,20 @@
 {{--                        <flux:navlist.item icon="document" badge="{{ \App\Models\Credential::count() }}" badge-color="lime" :href="route('credentials.index')" wire:navigate>{{ $credential->name }}</flux:navlist.item>--}}
 {{--                    @endforeach--}}
 
-                    <flux:navlist.item icon="users"  badge="{{ \App\Models\User::count() }}" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
-                    <flux:navlist.item icon="users" :href="route('controller.users.index')" :current="request()->routeIs('controller.users.index')" wire:navigate>{{ __('Users Controller') }}</flux:navlist.item>
+{{--                    <flux:navlist.item icon="users"  badge="{{ \App\Models\User::count() }}" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Users') }}</flux:navlist.item>--}}
+{{--                    <flux:navlist.item icon="users" :href="route('controller.users.index')" :current="request()->routeIs('controller.users.index')" wire:navigate>{{ __('Users Controller') }}</flux:navlist.item>--}}
 
 
-                    <flux:navlist.group expandable heading="Roles & Permissions" class="hidden lg:grid">
-                        <flux:navlist.item icon="tag" :href="route('roles.index')" :current="request()->routeIs('roles.index')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>
-                        <flux:navlist.item icon="rectangle-stack" :href="route('permissions.index')" :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('Permissions') }}</flux:navlist.item>
-                    </flux:navlist.group>
+{{--                    <flux:navlist.group expandable heading="Roles & Permissions" class="hidden lg:grid">--}}
+{{--                        <flux:navlist.item icon="tag" :href="route('roles.index')" :current="request()->routeIs('roles.index')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>--}}
+{{--                        <flux:navlist.item icon="rectangle-stack" :href="route('permissions.index')" :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('Permissions') }}</flux:navlist.item>--}}
+{{--                    </flux:navlist.group>--}}
 
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
+
 
             <flux:navlist variant="outline">
                 <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
