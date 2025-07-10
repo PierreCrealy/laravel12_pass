@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CredentialController;
 use App\Http\Controllers\MailController;
 
 use App\Livewire\Users\UserIndex;
@@ -40,6 +41,13 @@ Route::middleware(['auth'])->group(function () {
 //    Route::get('users', UserIndex::class)->name('users.index');
 
     Route::get('/controller/users', [UserController::class, 'index'])->name('controller.users.index');
+
+    Route::group(['prefix' => 'credentials', 'as' => 'credentials.'], function () {
+        Route::get('/{repertory}', [CredentialController::class, 'index'])->name('index');
+        Route::post('/store', [CredentialController::class, 'store'])->name('store');
+        Route::get('/edit/{credential}', [CredentialController::class, 'edit'])->name('edit');
+        Route::get('/delete/{credential}', [CredentialController::class, 'destroy'])->name('delete');
+    });
 
     Route::group(['prefix' => 'utilisateurs', 'as' => 'users.'], function () {
         Route::get('/', UserIndex::class)->name('index');
