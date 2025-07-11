@@ -29,6 +29,7 @@ class Credential extends Model
     protected $fillable = [
         'name',
         'value',
+        'repertory_id'
     ];
 
 

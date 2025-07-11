@@ -1,1 +1,0 @@
-window.App=window.App||{};(function(o,i,n){n.common={init:function(){console.log("oui"),this.generator()},generator:function(){alert("test")}}})(window.jQuery,window,window.App);$(document).ready(function(){App.common.init()});

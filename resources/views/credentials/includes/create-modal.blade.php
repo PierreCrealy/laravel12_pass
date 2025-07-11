@@ -14,7 +14,7 @@
 
             <flux:select name="repertory_id" label="Repertory" placeholder="Choose repertory..." class="mb-5">
                 @foreach(\App\Models\Repertory::all() as $repo)
-                    <flux:select.option>{{ $repo->name }}</flux:select.option>
+                    <flux:select.option value="{{$repo->id}}">{{ $repo->name }}</flux:select.option>
                 @endforeach
             </flux:select>
 

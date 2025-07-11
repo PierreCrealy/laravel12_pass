@@ -32,7 +32,8 @@ class CredentialController extends Controller
             $newCredential
                 ->fill([
                     'name'  => $request->get('name'),
-                    'value' => '',
+                    'value' => $request->get('value'),
+                    'repertory_id' => $request->get('repertory_id'),
                 ])
                 ->save();
 
