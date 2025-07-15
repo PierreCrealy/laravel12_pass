@@ -16,15 +16,13 @@
         <div class="relative">
             <flux:checkbox.group id="options" label="Options list">
                 <div class="grid grid-cols-2 gap-4">
+                    <flux:checkbox.all label="Toutes" />
 
-                <flux:checkbox.all label="Toutes"  />
+                    <flux:checkbox label="Upper" value="maj" />
+                    <flux:checkbox label="Lower" value="min" />
 
-                <flux:checkbox label="Upper" value="maj" />
-                <flux:checkbox label="Lower" value="min" />
-
-                <flux:checkbox label="Numbers" value="num" />
-                <flux:checkbox label="Symbols" value="sym" />
-                <flux:checkbox label="Specials" value="spec" />
+                    <flux:checkbox label="Numbers" value="num" />
+                    <flux:checkbox label="Symbols" value="sym" />
                 </div>
             </flux:checkbox.group>
         </div>

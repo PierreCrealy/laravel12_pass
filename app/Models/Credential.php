@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
+use App\Casts\EncryptedCredential;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Ramsey\Collection\Collection;
 
 
@@ -30,6 +29,10 @@ class Credential extends Model
         'name',
         'value',
         'repertory_id'
+    ];
+
+    protected $casts = [
+        'value' => EncryptedCredential::class
     ];
 
 

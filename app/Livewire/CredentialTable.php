@@ -6,6 +6,7 @@ use App\Models\Credential;
 use App\Models\Repertory;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -13,11 +14,17 @@ use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Themes\BigFonts;
 
 final class CredentialTable extends PowerGridComponent
 {
     public string $tableName = 'credential-table';
     public int $repertoryId;
+
+//    public function customThemeClass(): ?string
+//    {
+//        return BigFonts::class;
+//    }
 
     public function setUp(): array
     {
@@ -48,6 +55,9 @@ final class CredentialTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
+            ->add('img', function(){
+                return '<img src="https://www.svgrepo.com/show/353985/laravel.svg" alt="image" width="25px" height="25px">';
+            })
             ->add('name')
             ->add('value', function (Credential $credential) {
                 return Str::limit($credential->value, 50);
@@ -60,6 +70,7 @@ final class CredentialTable extends PowerGridComponent
     public function columns(): array
     {
         return [
+            Column::make('Image', 'img'),
             Column::make('Name', 'name')
                 ->sortable()
                 ->searchable(),

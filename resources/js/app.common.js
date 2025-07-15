@@ -10,8 +10,7 @@ window.App = window.App || {};
         min: 'abcdefghijklmnopqrstuvwxyz',
         maj: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         num: '0123456789',
-        sym: '!@#$%^&*()_+-=[]{}|;:,.<>?',
-        spec: '~`!@#$%^&*()_+-=[]{}\\|;:\'",.<>?/',
+        sym: '~`!@#$%^&*()_+-=[]{}\\|;:\'",.<>?/',
     };
 
     App.common = {
@@ -35,7 +34,6 @@ window.App = window.App || {};
             availableChain += options.includes('maj') ? chain.maj : '';
             availableChain += options.includes('num') ? chain.num : '';
             availableChain += options.includes('sym') ? chain.sym : '';
-            availableChain += options.includes('spec') ? chain.spec : '';
 
             let availableChainRandom = [...availableChain].sort(() => Math.random() - 0.5)
 
