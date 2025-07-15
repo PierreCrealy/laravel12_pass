@@ -4,7 +4,7 @@
     "name": "jquery"
   },
   "resources/css/app.css": {
-    "file": "assets/app-D1Muzy_I.css",
+    "file": "assets/app-nuXsz4pn.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -18,7 +18,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CczxPOft.js",
+    "file": "assets/app-CSDTdL6U.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,

@@ -27,9 +27,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/mail-preview', function () {
-    return view('mails.basic');
-})->name('mail-preview');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -44,9 +41,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'credentials', 'as' => 'credentials.'], function () {
         Route::get('/{repertory}', [CredentialController::class, 'index'])->name('index');
-        Route::post('/store', [CredentialController::class, 'store'])->name('store');
-        Route::get('/edit/{credential}', [CredentialController::class, 'edit'])->name('edit');
+        Route::get('/{repertory}/create', [CredentialController::class, 'create'])->name('create');
         Route::get('/delete/{credential}', [CredentialController::class, 'destroy'])->name('delete');
+        Route::post('/store', [CredentialController::class, 'store'])->name('store');
     });
 
     Route::group(['prefix' => 'utilisateurs', 'as' => 'users.'], function () {
