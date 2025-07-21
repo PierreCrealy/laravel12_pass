@@ -27,7 +27,7 @@ class CredentialController extends Controller
             ->orderBy('name')
             ->get()
             ->groupBy(function (Credential $credential){
-               return Str::upper($credential->name[0]);
+               return Str::upper($credential->title[0]);
             });
 
         return view('credentials.index', compact('repertory', 'groupedCredentials', 'tags'));
@@ -47,10 +47,17 @@ class CredentialController extends Controller
         try{
             $newCredential = Credential::findOrNew($request->get('id'));
 
+            $image = $request->file('image');
+            $storedImage = $image->move(public_path('images'), $image->getClientOriginalName());
+
             $newCredential
                 ->fill([
-                    'name'  => $request->get('name'),
-                    'value' => $request->get('value'),
+                    'title'        => $request->get('title'),
+                    'note'         => $request->get('note'),
+                    'login'        => $request->get('login'),
+                    'password'     => $request->get('password'),
+                    'link'         => $request->get('link'),
+                    'image'        => $storedImage ? $image->getClientOriginalName() : 'Not imported',
                     'repertory_id' => $request->get('repertory_id'),
                 ])
                 ->save();

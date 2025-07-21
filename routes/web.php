@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RepertoryController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -44,6 +45,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{repertory}/create', [CredentialController::class, 'create'])->name('create');
         Route::get('/delete/{credential}', [CredentialController::class, 'destroy'])->name('delete');
         Route::post('/store', [CredentialController::class, 'store'])->name('store');
+    });
+
+    Route::group(['prefix' => 'repertories', 'as' => 'repertories.'], function () {
+        Route::get('/', [RepertoryController::class, 'index'])->name('index');
+        Route::get('/delete/{repertory}', [RepertoryController::class, 'destroy'])->name('delete');
+        Route::post('/store', [RepertoryController::class, 'store'])->name('store');
     });
 
     Route::group(['prefix' => 'utilisateurs', 'as' => 'users.'], function () {

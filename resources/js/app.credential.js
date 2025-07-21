@@ -17,8 +17,11 @@ window.App = window.App || {};
             const $btn = $(this)
 
             $("input[name=id]").val($btn.data('id'))
-            $("input[name=name]").val($btn.data('name'))
-            $("input[name=value]").val($btn.data('value'))
+            $("input[name=title]").val($btn.data('title'))
+            $("input[name=note]").val($btn.data('note'))
+            $("input[name=login]").val($btn.data('login'))
+            $("input[name=password]").val($btn.data('password'))
+            $(".credential-link").attr('href', $btn.data('link'))
             $("select[name=repertory_id]").val($btn.data('repertory-id'))
 
 

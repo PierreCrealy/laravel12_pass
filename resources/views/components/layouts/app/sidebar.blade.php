@@ -12,46 +12,61 @@
             </a>
 
             <flux:modal.trigger name="password-generator">
-                <flux:button class="mt-10 mb-5" icon="cube" >Password Generator</flux:button>
+                <flux:button class="mt-10 mb-5 rounded-sm" icon="command-line" >Password Generator</flux:button>
             </flux:modal.trigger>
 
-            @include('includes.password-generator')
+            @include('includes.modal-password-generator')
+
+
+
+            <flux:modal.trigger name="repertory-creator">
+                <flux:button class="mt-10 mb-5 rounded-sm" icon="command-line" >Repertory Creator</flux:button>
+            </flux:modal.trigger>
+
+            @include('includes.modal-repertory-creator')
 
 
 
 
-            <flux:navlist variant="outline">
+            <flux:navlist>
                 <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-{{--                    <flux:navlist.item icon="newspaper" badge="{{ \App\Models\Credential::count() }}" badge-color="lime" :href="route('credentials.index')" :current="request()->routeIs('credentials.index')" wire:navigate>{{ __('Credentials') }}</flux:navlist.item>--}}
+{{--                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>--}}
 
-                    <flux:navlist.group expandable heading="Credential Repertories" icon="newspaper" class="hidden lg:grid">
-                        @foreach(\App\Models\Repertory::all() as $repertory)
-                            <flux:navlist.item
-                                icon="document"
-                                badge="{{ $repertory->credentials()->count() }}" badge-color="lime"
-                                :href="route('credentials.index', ['repertory' => $repertory])"
-                                {{-- :current="request()->routeIs('credentials.index')" --}}
-                                wire:navigate
-                            >
-                                {{ \Illuminate\Support\Str::limit($repertory->name, 15) }}
-                            </flux:navlist.item>
-                        @endforeach
-                    </flux:navlist.group>
+                    <flux:dropdown gap="5">
+                        <flux:profile
+                            name="Credential repertories"
+                            :initials="\App\Models\Credential::count()"
+                            icon-trailing="folder-git-2"
+                        />
 
+                        <flux:menu class="w-[220px] h-[400px] p-0 text-sm font-normal">
+                            @foreach(\App\Models\Repertory::all() as $repertory)
 
-{{--                    @foreach(\App\Models\Credential::all() as $credential)--}}
-{{--                        <flux:navlist.item icon="document" badge="{{ \App\Models\Credential::count() }}" badge-color="lime" :href="route('credentials.index')" wire:navigate>{{ $credential->name }}</flux:navlist.item>--}}
-{{--                    @endforeach--}}
+                                <flux:menu.radio.group>
+                                    <div class="p-0 text-sm font-normal">
+                                        <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
+                                            <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
+                                                <span class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                                                    {{ $repertory->credentials()->count() }}
+                                                </span>
+                                            </span>
+                                            <flux:menu.item
+                                                :href="route('credentials.index', ['repertory' => $repertory])"
+                                                badge="{{ $repertory->credentials()->count() }}" badge-color="zinc"
+                                                wire:navigate
+                                            >
+                                                {{ \Illuminate\Support\Str::limit($repertory->name, 15) }}
+                                            </flux:menu.item>
+                                        </div>
+                                    </div>
+                                </flux:menu.radio.group>
 
-{{--                    <flux:navlist.item icon="users"  badge="{{ \App\Models\User::count() }}" :href="route('users.index')" :current="request()->routeIs('users.index')" wire:navigate>{{ __('Users') }}</flux:navlist.item>--}}
-{{--                    <flux:navlist.item icon="users" :href="route('controller.users.index')" :current="request()->routeIs('controller.users.index')" wire:navigate>{{ __('Users Controller') }}</flux:navlist.item>--}}
+                                <flux:menu.separator />
+                            @endforeach
 
+                        </flux:menu>
+                    </flux:dropdown>
 
-{{--                    <flux:navlist.group expandable heading="Roles & Permissions" class="hidden lg:grid">--}}
-{{--                        <flux:navlist.item icon="tag" :href="route('roles.index')" :current="request()->routeIs('roles.index')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>--}}
-{{--                        <flux:navlist.item icon="rectangle-stack" :href="route('permissions.index')" :current="request()->routeIs('permissions.index')" wire:navigate>{{ __('Permissions') }}</flux:navlist.item>--}}
-{{--                    </flux:navlist.group>--}}
 
                 </flux:navlist.group>
             </flux:navlist>

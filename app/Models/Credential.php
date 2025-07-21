@@ -14,8 +14,12 @@ use Ramsey\Collection\Collection;
  * App\Models\Tag
  *
  * @property int                           $id
- * @property string                        $name
- * @property string                        $value
+ * @property string                        $title
+ * @property string                        $note
+ * @property string                        $login
+ * @property string                        $password
+ * @property string                        $link
+ * @property string                        $image
  * @property int                           $repertory_id
  * @property object|Repertory              $repertory
  * @property Collection|Tag[]              $tags
@@ -26,13 +30,18 @@ class Credential extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'value',
+        'title',
+        'note',
+        'login',
+        'password',
+        'link',
+        'image',
         'repertory_id'
     ];
 
     protected $casts = [
-        'value' => EncryptedCredential::class
+        'login' => EncryptedCredential::class,
+        'password' => EncryptedCredential::class
     ];
 
 

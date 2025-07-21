@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('credentials', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-            $table->longText('value');
+            $table->string('title');
+            $table->longText('note')->nullable();
+
+            $table->string('login');
+            $table->string('password');
+
+            $table->string('link')->nullable();
+            $table->string('image')->nullable();
 
             $table->foreignId('repertory_id')->nullable()->references('id')->on('repertories')->onDelete('set null');
 

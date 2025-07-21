@@ -24,7 +24,7 @@
     </div>
 
     @if($credId)
-        @include('livewire.credentials.includes.credential-create-modal', ['$credential' => $this->getCredential()])
+        @include('livewire.credentials.includes.credential-create-modal')
     @endif
 
 </div>

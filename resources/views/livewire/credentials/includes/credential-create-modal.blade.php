@@ -1,12 +1,9 @@
-@props(['credential'])
 
 <flux:modal name="create-credential" variant="flyout">
     <div class="space-y-6">
 
-        <flux:heading size="lg">Create Credential - {{ $credId }}</flux:heading>
+        <flux:heading size="lg">Create Credential</flux:heading>
         <flux:text class="mt-2">Add a new credential on your repertory.</flux:text>
-
-
 
         <form wire:submit="submit" autocomplete="off" action="{{ route('credentials.create') }}" method="post" enctype="multipart/form-data" id="create-credential">
             @csrf

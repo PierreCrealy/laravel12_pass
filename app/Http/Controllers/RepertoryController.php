@@ -6,62 +6,73 @@ use App\Models\Repertory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRepertoryRequest;
 use App\Http\Requests\UpdateRepertoryRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RepertoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreRepertoryRequest $request)
+    public function store(Request $request)
     {
         //
+
+        try{
+
+            $newRepertory = Repertory::findOrNew($request->get('id'));
+
+            $newRepertory
+                ->fill([
+                    'name' => $request->get('name'),
+                    'slug' => str_replace(' ', '-', strtolower($request->get('name')))
+                ])
+                ->save();
+
+            return back()->with('success', 'OK');
+
+        }catch (\Exception $e)
+        {
+            Log::error('[RepertoryController] Une erreur est survenue lors de l\'ajout : ' . $e->getMessage());
+
+            return back()->with('error', 'NOK');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Repertory $repertory)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Repertory $repertory)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRepertoryRequest $request, Repertory $repertory)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Repertory $repertory)
     {
-        //
+        try{
+            $repertory->delete();
+
+            return back()->with('success', 'OK');
+        }catch (\Exception $e)
+        {
+            Log::error('[RepertoryController] Une erreur est survenue lors de la suppression : ' . $e->getMessage());
+
+            return back()->with('error', 'NOK');
+        }
     }
 }

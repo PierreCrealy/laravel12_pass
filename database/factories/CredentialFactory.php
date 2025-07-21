@@ -17,8 +17,15 @@ class CredentialFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'         => fake()->name,
-            'value'        => fake()->text(150),
+            'title'        => fake()->name,
+            'note'         => fake()->text(125),
+
+            'login'        => fake()->userName(),
+            'password'     => fake()->password(),
+
+            'link'         => fake()->url(),
+            'image'        => fake()->filePath(),
+
             'repertory_id' => fake()->numberBetween(1,8),
         ];
     }

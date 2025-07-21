@@ -10,7 +10,6 @@
             @csrf
 
             <div class="grid auto-rows-min gap-4 md:grid-cols-2">
-                <flux:input type="text" name="name" label="Name" placeholder="Your name" class="mb-5"/>
                 <flux:select name="repertory_id" label="Repertory" placeholder="Choose repertory..." class="mb-5 w-sm">
                     @foreach(\App\Models\Repertory::all() as $repo)
                         <flux:select.option value="{{$repo->id}}">{{ $repo->name }}</flux:select.option>
@@ -18,7 +17,15 @@
                 </flux:select>
             </div>
 
-            <flux:input type="text" name="value" label="Value" placeholder="Your credential" class="mb-5" />
+            <flux:input type="text" name="title" label="Titre" class="mb-5"/>
+            <flux:input type="text" name="note" label="Note" class="mb-5"/>
+
+            <flux:input type="text" name="login" label="Login" class="mb-5" copyable/>
+            <flux:input type="password" name="password" label="Password" class="mb-5" viewable copyable />
+
+            <flux:input type="text" name="link" label="Link" class="mb-5"/>
+
+            <flux:input type="file" name="image" label="Image"/>
 
             <flux:separator class="mt-10 mb-5" />
 
